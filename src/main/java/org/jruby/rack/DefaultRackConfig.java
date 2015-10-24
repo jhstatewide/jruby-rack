@@ -87,6 +87,10 @@ public class DefaultRackConfig implements RackConfig {
             if ( matcher.find() ) {
                 final String name = "RUBY" +
                     matcher.group(1) + '_' + matcher.group(2);
+                // special case for JRuby 9000
+                if (name.equals("RUBY2_2")) {
+                    return CompatVersion.RUBY2_0;
+                }
                 try {
                     return Enum.valueOf(CompatVersion.class, name);
                 }
